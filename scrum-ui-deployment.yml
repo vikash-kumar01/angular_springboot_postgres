@@ -19,27 +19,6 @@ spec:
         image: vikashashoke/scrum-board_scrum-ui
         ports:
         - containerPort: 4200
-        env:
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: postgresdb-secret
-              key: postgresdb-root-username
-        - name: POSTGRES_PASSWORD
-          valueFrom: 
-            secretKeyRef:
-              name: postgresdb-secret
-              key:  postgresdb-root-password
-        - name: POSTGRES_DB
-          valueFrom: 
-            configMapKeyRef:
-              name: postgresdb-configmap
-              key: POSTGRES_DB
-        - name: DB_SERVER
-          valueFrom: 
-            configMapKeyRef:
-              name: postgresdb-configmap
-              key: DB_SERVER
 
 ---
 apiVersion: v1
@@ -53,7 +32,7 @@ spec:
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 8080
+    targetPort: 4200
     nodePort: 30000
 
 
