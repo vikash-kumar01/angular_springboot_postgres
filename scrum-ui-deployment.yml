@@ -24,7 +24,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: scrum-ui-service
+  name: scrum-ui
 spec:
   selector:
     app: scrum-ui
@@ -33,7 +33,7 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: 4200
-    nodePort: 30000
+    #nodePort: 30000
 
 
 # minikube service mongo-express-service
