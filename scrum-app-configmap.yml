@@ -1,0 +1,7 @@
+kind:apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgresdb-configmap
+data:
+  DB_SERVER: scrum-postgres
+  POSTGRES_DB: scrum

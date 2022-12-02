@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scrum-ui
+  labels:
+    app: scrum-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scrum-ui
+  template:
+    metadata:
+      labels:
+        app: scrum-ui
+    spec:
+      containers:
+      - name: scrum-ui
+        image: vikashashoke/scrum-board_scrum-ui
+        ports:
+        - containerPort: 4200
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgresdb-secret
+              key: postgresdb-root-username
+        - name: POSTGRES_PASSWORD
+          valueFrom: 
+            secretKeyRef:
+              name: postgresdb-secret
+              key:  postgresdb-root-password
+        - name: POSTGRES_DB
+          valueFrom: 
+            configMapKeyRef:
+              name: postgresdb-configmap
+              key: POSTGRES_DB
+        - name: DB_SERVER
+          valueFrom: 
+            configMapKeyRef:
+              name: postgresdb-configmap
+              key: DB_SERVER
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: scrum-ui-service
+spec:
+  selector:
+    app: scrum-ui
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+    nodePort: 30000
+
+
+# minikube service mongo-express-service
