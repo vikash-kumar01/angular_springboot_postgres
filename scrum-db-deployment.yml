@@ -41,7 +41,7 @@ spec:
       volumes:
       - name:  scrum-data
         awsElasticBlockStore:
-          volumeID: vol-04efdd7e7efdc9bad
+          volumeID: vol-066c824271d46c340
           fsType: ext4
 
 ---
